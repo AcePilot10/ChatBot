@@ -101,6 +101,8 @@ public class ChatbotWindow extends JFrame {
 		txtResponse.setBounds(275, 178, 313, 100);
 		contentPane.add(txtResponse);
 		txtResponse.setColumns(10);
+		txtResponse.setLineWrap(true);
+		txtResponse.setWrapStyleWord(true);
 		
 		RobotPanel panel = new RobotPanel(250, 350, "robot2.jpg");
 		panel.setBounds(10, 44, 250, 350);
@@ -115,6 +117,8 @@ public class ChatbotWindow extends JFrame {
 				chatButtonClicked();	
 			}
 		});
+		
+		getRootPane().setDefaultButton(btnChat);
 		contentPane.add(btnChat);
 		
 		JLabel lblInput = new JLabel("Input");
@@ -141,13 +145,13 @@ public class ChatbotWindow extends JFrame {
 	}
 	
 	private void chatButtonClicked() {
-		try {
+		new Thread(() -> {
+			try {
 			 String input = txtInput.getText();
 			 String response = session.think(input);
 			 txtResponse.setText("Bot> " + response);
 			 txtInput.setText("");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+				} catch(Exception e) { }
+		 }).start();
 	}
 }

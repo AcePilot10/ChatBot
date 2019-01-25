@@ -20,7 +20,7 @@ public class RobotPanel extends JPanel {
 		this.width = width;
 		this.height = height;
 		try {
-			img = ImageIO.read(new File("src/Assets/" + robot));
+			img = ImageIO.read(new File("Assets/" + robot));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
